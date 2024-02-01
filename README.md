@@ -14,19 +14,16 @@ Create or modify your [prettier configuration file](https://prettier.io/docs/en/
 
 ```json
 {
-  "plugins": ["prettier-plugin-slidev"]
-}
-```
-
-If only some of the Markdown files are the slides, you can configure the plugin to only format the slides:
-
-```json
-{
   "overrides": [
     {
-      "files": "slides/*.md",
-      "options": { "parser": "slidev" }
+      "files": ["slides.md", "pages/*.md"],
+      "options": {
+        "parser": "slidev",
+        "plugins": ["prettier-plugin-slidev"]
+      }
     }
   ]
 }
 ```
+
+Note that only specifying `plugins` is not enough, because Slidev and common Markdown files share the same file extension `.md`.
