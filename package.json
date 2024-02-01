@@ -1,0 +1,49 @@
+{
+  "name": "prettier-plugin-slidev",
+  "version": "0.0.1",
+  "description": "A prettier plugin for Slidev",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.mts",
+  "type": "module",
+  "keywords": [
+    "slidev",
+    "prettier",
+    "plugin",
+    "prettier-plugin",
+    "format"
+  ],
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts"
+    }
+  },
+  "scripts": {
+    "build": "tsup ./src/index.ts",
+    "dev": "tsup ./src/index.ts --watch ./src --watch ./test/input --watch ./test/index.js"
+  },
+  "author": {
+    "name": "_Kerman",
+    "email": "kermanx@qq.com",
+    "url": "https://github.com/kermanx"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "prettier": "^3.2.4"
+  },
+  "dependencies": {
+    "@slidev/parser": "^0.46.3",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@slidev/types": "^0.46.3",
+    "@types/js-yaml": "^4.0.9",
+    "tsup": "^8.0.1"
+  }
+}
