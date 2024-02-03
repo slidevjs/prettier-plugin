@@ -36,8 +36,9 @@ jobs:
       - name: Build KermanX/slidev
         run: pnpm build
         working-directory: ../slidev
-      - name: Install modified version of Slidev
+      - name: Install deps
         run: |
+          pnpm install
           pnpm i ../slidev/packages/parser
           pnpm i -D ../slidev/packages/types
       - name: Run tests
