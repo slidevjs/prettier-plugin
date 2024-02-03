@@ -25,8 +25,10 @@
     }
   },
   "scripts": {
-    "build": "tsup ./src/index.ts",
-    "dev": "tsup ./src/index.ts --watch ./src --watch ./test/input --watch ./test/index.js"
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "author": {
     "name": "_Kerman",
@@ -44,6 +46,11 @@
   "devDependencies": {
     "@slidev/types": "^0.46.3",
     "@types/js-yaml": "^4.0.9",
-    "tsup": "^8.0.1"
+    "@types/node": "^20.11.15",
+    "@vitest/coverage-istanbul": "^1.2.2",
+    "tsup": "^8.0.1",
+    "vite": "^5.0.12",
+    "vite-plugin-dts": "^3.7.2",
+    "vitest": "^1.2.2"
   }
 }
