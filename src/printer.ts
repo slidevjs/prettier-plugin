@@ -45,14 +45,15 @@ async function printFrontmatter(
   info: SlideInfoBase,
   textToDoc: (text: string, options: Options) => Promise<Doc>
 ): Promise<Doc[]> {
-  if (Object.keys(info.frontmatter ?? {}).length === 0) return [];
+  const trimed = info.frontmatterRaw?.trim() ?? "";
+  if (trimed.length === 0) return [];
 
-  const frontmatter = await textToDoc(YAML.dump(info.frontmatter), {
+  const formatted = await textToDoc(trimed, {
     parser: "yaml",
   });
   return info.frontmatterStyle === "yaml"
-    ? [hardline, "```yaml", hardline, frontmatter, hardline, "```", hardline]
-    : [frontmatter, hardline, "---", hardline];
+    ? [hardline, "```yaml", hardline, formatted, hardline, "```", hardline]
+    : [formatted, hardline, "---", hardline];
 }
 
 async function printContent(

@@ -27,5 +27,18 @@ jobs:
         uses: pnpm/action-setup@v2.4.0
         with:
           version: 8
-      - name: Install and run tests
-        run: pnpm it
+      - name: Clone KermanX/slidev
+        run: git clone https://github.com/KermanX/slidev
+        working-directory: ../
+      - name: Install KermanX/slidev
+        run: pnpm i
+        working-directory: ../slidev
+      - name: Build KermanX/slidev
+        run: pnpm build
+        working-directory: ../slidev
+      - name: Install modified version of Slidev
+        run: |
+          pnpm i ../slidev/packages/parser
+          pnpm i -D ../slidev/packages/types
+      - name: Run tests
+        run: pnpm test

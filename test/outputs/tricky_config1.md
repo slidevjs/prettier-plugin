@@ -1,7 +1,6 @@
 ---
-a: 1
+a: 1 # hi
 b: 2
-title: Title
 ---
 
 # Title
@@ -11,7 +10,7 @@ title: Title
 | c   | d   |
 
 ---
-layout: abcd
+layout: 'abcd'
 ---
 
 # Title
@@ -70,6 +69,8 @@ b: 2
 let a = '111'
 ```
 
+---
+# empty frontmatter
 ---
 
 # Title
