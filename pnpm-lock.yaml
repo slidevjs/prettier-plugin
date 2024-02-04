@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@slidev/parser':
-    specifier: ^0.46.3
-    version: 0.46.3
+    specifier: ^0.47.2
+    version: 0.47.2
   js-yaml:
     specifier: ^4.1.0
     version: 4.1.0
@@ -17,8 +17,8 @@ dependencies:
 
 devDependencies:
   '@slidev/types':
-    specifier: ^0.46.3
-    version: 0.46.3
+    specifier: ^0.47.2
+    version: 0.47.2
   '@types/js-yaml':
     specifier: ^4.0.9
     version: 4.0.9
@@ -730,16 +730,16 @@ packages:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: true
 
-  /@slidev/parser@0.46.3:
-    resolution: {integrity: sha512-J9HGf+AIOFTQ7jZhyaYgsnN2jGGaNoyslSAW+OCXWHQYEW/2w48/wLnSQcD9DA8nHJvo49NMAW2uttpB4PCW9A==}
+  /@slidev/parser@0.47.2:
+    resolution: {integrity: sha512-fIQpAlLPuSU3ceAWn0i43s+Cz8DufL9H+3cbJc/u2XZV5asojcQZLEkmUb/44lvq9GPBKfYkEYvqg0SO9xbMuw==}
     engines: {node: '>=18.0.0'}
     dependencies:
-      '@slidev/types': 0.46.3
+      '@slidev/types': 0.47.2
       js-yaml: 4.1.0
     dev: false
 
-  /@slidev/types@0.46.3:
-    resolution: {integrity: sha512-jTrKLvYaZLf+XzKEk5PSgyRd95eurW1j3WzZx+1H0SKkpqrwGhWqaoo8edZHmCIXjOGFrBx40Yu4/c+1EYdMdQ==}
+  /@slidev/types@0.47.2:
+    resolution: {integrity: sha512-SJNwBi/ax9+c7iJdHuh/IGnyo36oSYO3SFpt2kpd+DZaxaX7XL7NcqFS2c+kbCAEanBFxcW4JC4EJQO/v3qjow==}
     engines: {node: '>=18.0.0'}
 
   /@types/argparse@1.0.38:

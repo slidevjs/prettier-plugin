@@ -40,11 +40,11 @@
     "prettier": "^3.2.4"
   },
   "dependencies": {
-    "@slidev/parser": "^0.46.3",
+    "@slidev/parser": "^0.47.2",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
-    "@slidev/types": "^0.46.3",
+    "@slidev/types": "^0.47.2",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.15",
     "@vitest/coverage-istanbul": "^1.2.2",
