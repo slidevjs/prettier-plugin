@@ -5,6 +5,13 @@
   "description": "A prettier plugin for Slidev",
   "author": "_Kerman <kermanx@qq.com>",
   "license": "MIT",
+  "funding": "https://github.com/sponsors/antfu",
+  "homepage": "https://sli.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slidevjs/prettier-plugin"
+  },
+  "bugs": "https://github.com/slidevjs/prettier-plugin/issues",
   "keywords": [
     "slidev",
     "prettier",
