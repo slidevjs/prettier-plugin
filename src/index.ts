@@ -1,15 +1,15 @@
-import { Plugin } from "prettier";
-import { astFormat } from "./ast";
-import { parser } from "./parser";
-import { printer } from "./printer";
+import type { Plugin } from 'prettier'
+import { astFormat } from './ast'
+import { parser } from './parser'
+import { printer } from './printer'
 
 export default {
   languages: [
     {
-      name: "slidev",
-      parsers: ["slidev"],
-      extensions: [".md"],
-      vscodeLanguageIds: ["markdown"],
+      name: 'slidev',
+      parsers: ['slidev'],
+      extensions: ['.md'],
+      vscodeLanguageIds: ['markdown'],
     },
   ],
   parsers: {
@@ -18,4 +18,4 @@ export default {
   printers: {
     [astFormat]: printer,
   },
-} as Plugin;
+} as Plugin

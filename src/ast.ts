@@ -1,16 +1,16 @@
-import { SlideInfoBase } from "@slidev/types";
+import type { SlideInfoBase } from '@slidev/types'
 
-export const astFormat = "slidev-ast";
+export const astFormat = 'slidev-ast'
 
 interface MarkdownNode {
-  type: "markdown";
-  raw: string;
-  slides: SlideNode[];
+  type: 'markdown'
+  raw: string
+  slides: SlideNode[]
 }
 
 interface SlideNode {
-  type: "slide";
-  info: SlideInfoBase;
+  type: 'slide'
+  info: SlideInfoBase
 }
 
-export type ASTNode = MarkdownNode | SlideNode;
+export type ASTNode = MarkdownNode | SlideNode

@@ -1,10 +1,10 @@
 {
   "name": "prettier-plugin-slidev",
+  "type": "module",
   "version": "0.0.1",
   "description": "A prettier plugin for Slidev",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "type": "module",
+  "author": "_Kerman <kermanx@qq.com>",
+  "license": "MIT",
   "keywords": [
     "slidev",
     "prettier",
@@ -13,26 +13,30 @@
     "formatter",
     "format"
   ],
-  "files": [
-    "dist",
-    "LICENSE",
-    "README.md"
-  ],
   "exports": {
     ".": {
-      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "default": "./dist/index.js"
     }
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "nr lint --fix",
+    "typecheck": "vue-tsc --noEmit",
+    "release": "bumpp package.json"
   },
-  "author": "_Kerman <kermanx@qq.com>",
-  "license": "MIT",
   "peerDependencies": {
     "prettier": "^3.2.4"
   },
@@ -40,13 +44,27 @@
     "@slidev/parser": "^0.47.4"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.6.4",
+    "@antfu/ni": "^0.21.12",
     "@slidev/types": "^0.47.4",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.15",
     "@vitest/coverage-istanbul": "^1.2.2",
+    "bumpp": "^9.3.0",
+    "eslint": "^8.56.0",
+    "lint-staged": "^15.2.2",
+    "simple-git-hooks": "^2.9.0",
     "tsup": "^8.0.1",
     "vite": "^5.0.12",
     "vite-plugin-dts": "^3.7.2",
     "vitest": "^1.2.2"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*": [
+      "eslint --fix --cache"
+    ]
   }
 }
