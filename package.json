@@ -1,7 +1,7 @@
 {
   "name": "prettier-plugin-slidev",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A prettier plugin for Slidev",
   "author": "_Kerman <kermanx@qq.com>",
   "license": "MIT",
