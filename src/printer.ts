@@ -1,5 +1,4 @@
 import { SlideInfoBase } from "@slidev/types";
-import YAML from "js-yaml";
 import type { Doc, Options, Printer } from "prettier";
 import { ASTNode } from "./ast";
 

@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "description": "A prettier plugin for Slidev",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.mts",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "keywords": [
     "slidev",
     "prettier",
-    "plugin",
     "prettier-plugin",
+    "plugin",
+    "formatter",
     "format"
   ],
   "files": [
@@ -21,7 +22,7 @@
     ".": {
       "default": "./dist/index.js",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.mts"
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
@@ -30,21 +31,16 @@
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
-  "author": {
-    "name": "_Kerman",
-    "email": "kermanx@qq.com",
-    "url": "https://github.com/kermanx"
-  },
+  "author": "_Kerman <kermanx@qq.com>",
   "license": "MIT",
   "peerDependencies": {
     "prettier": "^3.2.4"
   },
   "dependencies": {
-    "@slidev/parser": "^0.47.2",
-    "js-yaml": "^4.1.0"
+    "@slidev/parser": "^0.47.4"
   },
   "devDependencies": {
-    "@slidev/types": "^0.47.2",
+    "@slidev/types": "^0.47.4",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.15",
     "@vitest/coverage-istanbul": "^1.2.2",
