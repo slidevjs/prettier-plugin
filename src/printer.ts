@@ -20,22 +20,30 @@ export const printer: Printer<ASTNode> = {
       ]
     }
 
-    throw new Error(`Unknown node type: ${node.type}`)
+    if (node.type === 'slide')
+      return printSlideNoEmbed(node.info)
+
+    throw new Error(`Unknown node type: ${node}`)
   },
   embed(path) {
     const node = path.getNode() as ASTNode
 
-    if (node.type === 'slide') {
-      return async (textToDoc) => {
-        return [
-          ...(await printFrontmatter(node.info, textToDoc)),
-          ...(await printContent(node.info, textToDoc)),
-          ...printNote(node.info),
-        ]
-      }
-    }
+    if (node.type === 'slide')
+      return textToDoc => printSlide(node.info, textToDoc)
+
     return null
   },
+}
+
+async function printSlide(
+  info: SlideInfoBase,
+  textToDoc: (text: string, options: Options) => Promise<Doc>,
+): Promise<Doc[]> {
+  return [
+    ...(await printFrontmatter(info, textToDoc)),
+    ...(await printContent(info, textToDoc)),
+    ...printNote(info),
+  ]
 }
 
 async function printFrontmatter(
@@ -74,4 +82,33 @@ function printNote(info: SlideInfoBase): Doc[] {
   if (!info.note)
     return []
   return [hardline, '<!--', line, info.note.trim(), line, '-->', hardline]
+}
+
+function printSlideNoEmbed(info: SlideInfoBase): Doc[] {
+  return [
+    ...(printFrontmatterNoEmbed(info)),
+    ...(printContentNoEmbed(info)),
+    ...printNote(info),
+  ]
+}
+
+function printFrontmatterNoEmbed(info: SlideInfoBase): Doc[] {
+  const trimed = info.frontmatterRaw?.trim() ?? ''
+  if (trimed.length === 0)
+    return []
+
+  return info.frontmatterStyle === 'yaml'
+    ? [hardline, '```yaml', hardline, trimed, hardline, '```', hardline]
+    : [trimed, hardline, '---', hardline]
+}
+
+function printContentNoEmbed(info: SlideInfoBase): Doc[] {
+  if (info.content.trim().length === 0)
+    return []
+
+  return [
+    hardline,
+    info.content,
+    hardline,
+  ]
 }
