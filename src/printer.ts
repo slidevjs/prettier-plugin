@@ -50,8 +50,8 @@ async function printFrontmatter(
   textToDoc: (text: string, options: Options) => Promise<Doc>,
 ): Promise<Doc[]> {
   const trimed = info.frontmatterRaw?.trim() ?? ''
-  if (trimed.length === 0 && !info.isFirstSlide)
-    return []
+  if (trimed.length === 0)
+    return info.isFirstSlide ? [`---`, hardline] : []
 
   const formatted = await textToDoc(trimed, {
     parser: 'yaml',
@@ -93,8 +93,8 @@ function printSlideNoEmbed(info: SlideInfo): Doc[] {
 
 function printFrontmatterNoEmbed(info: SlideInfo): Doc[] {
   const trimed = info.frontmatterRaw?.trim() ?? ''
-  if (trimed.length === 0 && !info.isFirstSlide)
-    return []
+  if (trimed.length === 0)
+    return info.isFirstSlide ? [`---`, hardline] : []
 
   return info.frontmatterStyle === 'yaml'
     ? [hardline, '```yaml', hardline, trimed, hardline, '```', hardline]
