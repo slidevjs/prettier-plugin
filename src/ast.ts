@@ -2,15 +2,19 @@ import type { SlideInfoBase } from '@slidev/types'
 
 export const astFormat = 'slidev-ast'
 
-interface MarkdownNode {
+export interface MarkdownNode {
   type: 'markdown'
   raw: string
   slides: SlideNode[]
 }
 
-interface SlideNode {
+export interface SlideInfo extends SlideInfoBase {
+  isFirstSlide: boolean
+}
+
+export interface SlideNode {
   type: 'slide'
-  info: SlideInfoBase
+  info: SlideInfo
 }
 
 export type ASTNode = MarkdownNode | SlideNode

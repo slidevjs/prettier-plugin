@@ -20,9 +20,11 @@ export const parser: Parser<ASTNode> = {
     return {
       type: 'markdown',
       raw,
-      slides: slides.map(info => ({
+      slides: slides.map((info, index) => ({
         type: 'slide',
-        info,
+        info: Object.assign(info, {
+          isFirstSlide: index === 0,
+        }),
       })),
     }
   },

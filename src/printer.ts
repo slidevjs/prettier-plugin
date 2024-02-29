@@ -1,7 +1,6 @@
-import type { SlideInfoBase } from '@slidev/types'
 import type { Doc, Options, Printer } from 'prettier'
 import { doc } from 'prettier'
-import type { ASTNode } from './ast'
+import type { ASTNode, SlideInfo } from './ast'
 
 const { join, line, hardline } = doc.builders
 
@@ -36,7 +35,7 @@ export const printer: Printer<ASTNode> = {
 }
 
 async function printSlide(
-  info: SlideInfoBase,
+  info: SlideInfo,
   textToDoc: (text: string, options: Options) => Promise<Doc>,
 ): Promise<Doc[]> {
   return [
@@ -47,11 +46,11 @@ async function printSlide(
 }
 
 async function printFrontmatter(
-  info: SlideInfoBase,
+  info: SlideInfo,
   textToDoc: (text: string, options: Options) => Promise<Doc>,
 ): Promise<Doc[]> {
   const trimed = info.frontmatterRaw?.trim() ?? ''
-  if (trimed.length === 0)
+  if (trimed.length === 0 && !info.isFirstSlide)
     return []
 
   const formatted = await textToDoc(trimed, {
@@ -63,7 +62,7 @@ async function printFrontmatter(
 }
 
 async function printContent(
-  info: SlideInfoBase,
+  info: SlideInfo,
   textToDoc: (text: string, options: Options) => Promise<Doc>,
 ): Promise<Doc[]> {
   if (info.content.trim().length === 0)
@@ -78,13 +77,13 @@ async function printContent(
   ]
 }
 
-function printNote(info: SlideInfoBase): Doc[] {
+function printNote(info: SlideInfo): Doc[] {
   if (!info.note)
     return []
   return [hardline, '<!--', line, info.note.trim(), line, '-->', hardline]
 }
 
-function printSlideNoEmbed(info: SlideInfoBase): Doc[] {
+function printSlideNoEmbed(info: SlideInfo): Doc[] {
   return [
     ...(printFrontmatterNoEmbed(info)),
     ...(printContentNoEmbed(info)),
@@ -92,9 +91,9 @@ function printSlideNoEmbed(info: SlideInfoBase): Doc[] {
   ]
 }
 
-function printFrontmatterNoEmbed(info: SlideInfoBase): Doc[] {
+function printFrontmatterNoEmbed(info: SlideInfo): Doc[] {
   const trimed = info.frontmatterRaw?.trim() ?? ''
-  if (trimed.length === 0)
+  if (trimed.length === 0 && !info.isFirstSlide)
     return []
 
   return info.frontmatterStyle === 'yaml'
@@ -102,7 +101,7 @@ function printFrontmatterNoEmbed(info: SlideInfoBase): Doc[] {
     : [trimed, hardline, '---', hardline]
 }
 
-function printContentNoEmbed(info: SlideInfoBase): Doc[] {
+function printContentNoEmbed(info: SlideInfo): Doc[] {
   if (info.content.trim().length === 0)
     return []
 
