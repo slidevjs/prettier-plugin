@@ -11,13 +11,8 @@ export const printer: Printer<ASTNode> = {
     if (!node)
       throw new Error('Node is null')
 
-    if (node.type === 'markdown') {
-      return [
-        '---',
-        hardline,
-        join([hardline, '---', hardline], path.map(print, 'slides')),
-      ]
-    }
+    if (node.type === 'markdown')
+      return join([hardline, '---', hardline], path.map(print, 'slides'))
 
     if (node.type === 'slide')
       return printSlideNoEmbed(node.info)
@@ -51,14 +46,16 @@ async function printFrontmatter(
 ): Promise<Doc[]> {
   const trimed = info.frontmatterRaw?.trim() ?? ''
   if (trimed.length === 0)
-    return info.isFirstSlide ? [`---`, hardline] : []
+    return info.isFirstSlide ? [] : [hardline]
 
   const formatted = await textToDoc(trimed, {
     parser: 'yaml',
   })
+  const end = info.content.trim() ? [hardline] : []
+
   return info.frontmatterStyle === 'yaml'
-    ? [hardline, '```yaml', hardline, formatted, hardline, '```', hardline]
-    : [formatted, hardline, '---', hardline]
+    ? [hardline, '```yaml', hardline, formatted, hardline, '```', hardline, end]
+    : [info.isFirstSlide ? ['---', hardline] : [], formatted, hardline, '---', hardline, end]
 }
 
 async function printContent(
@@ -69,7 +66,6 @@ async function printContent(
     return []
 
   return [
-    hardline,
     await textToDoc(info.content, {
       parser: 'markdown',
     }),
@@ -94,11 +90,13 @@ function printSlideNoEmbed(info: SlideInfo): Doc[] {
 function printFrontmatterNoEmbed(info: SlideInfo): Doc[] {
   const trimed = info.frontmatterRaw?.trim() ?? ''
   if (trimed.length === 0)
-    return info.isFirstSlide ? [`---`, hardline] : []
+    return info.isFirstSlide ? [] : [hardline]
+
+  const end = info.content.trim() ? [hardline] : []
 
   return info.frontmatterStyle === 'yaml'
-    ? [hardline, '```yaml', hardline, trimed, hardline, '```', hardline]
-    : [trimed, hardline, '---', hardline]
+    ? [hardline, '```yaml', hardline, trimed, hardline, '```', hardline, end]
+    : [info.isFirstSlide ? ['---', hardline] : [], trimed, hardline, '---', hardline, end]
 }
 
 function printContentNoEmbed(info: SlideInfo): Doc[] {
@@ -106,7 +104,6 @@ function printContentNoEmbed(info: SlideInfo): Doc[] {
     return []
 
   return [
-    hardline,
     info.content,
     hardline,
   ]
